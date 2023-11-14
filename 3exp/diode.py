@@ -8,7 +8,7 @@ import math
 datasets = []
 OPTIONS_DICT = ['current', 'resistance']
 COLORS = ['#F26CA7', '#2ECEF5']
-log = True
+log = False
 
 with open('./3exp/data/diode.txt', 'r') as f:
     line = f.readline()
@@ -79,12 +79,12 @@ with open('./3exp/data/diode.txt', 'r') as f:
                 ax.set_ylabel('Log Corrente (ln(mA))')     
                 ax.set_title('Diodo: Voltagem x Log da Corrente')
                 ax.plot(X[start:], np.log(Y[start:]), marker='.', color=COLORS[setup], linestyle='none')
-            else:                
+            else:                            
                 ax.set_xlim((-0.2, 0.7))
                 ax.set_ylim((-0.5, 6))
                 ax.set_ylabel('Corrente (mA)')     
                 ax.set_title('Diodo: Voltagem x Corrente')
-                ax.plot(X, Y, marker='.', color=COLORS[setup], linestyle='none')
+                ax.plot(X, Y, marker='.', color=COLORS[setup], linestyle='--')
         else: # OPTIONS_DICT[setup] == 'resistance'
             if log:
                 start = 0
