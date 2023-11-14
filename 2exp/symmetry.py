@@ -7,7 +7,7 @@ import numpy as np
 datasets = []
 OPTIONS_DICT = ['ring', 'base', 'tip']
 
-with open('./data/symmetry.txt', 'r') as f:
+with open('./2exp/data/symmetry.txt', 'r') as f:
     line = f.readline()
     
     matrix = []
@@ -47,5 +47,5 @@ plt.legend(loc='best')
 plt.xlabel('x (cm)')
 plt.ylabel('DDP (V)')
 plt.title('DDP ao longo do eixo de simetria')
-plt.savefig(f'./symmetry/symmetry.pdf', format='pdf', bbox_inches='tight')
+plt.savefig(f'./2exp/symmetry/symmetry.pdf', format='pdf', bbox_inches='tight')
 plt.show()

@@ -8,7 +8,7 @@ import math
 datasets = []
 OPTIONS_DICT = ['base', 'tip', 'ring']
 
-with open('./data/contour.txt', 'r') as f:
+with open('./2exp/data/contour.txt', 'r') as f:
     line = f.readline()
     
     matrix = []
@@ -97,4 +97,4 @@ for setup in range(3):
     ax.clabel(CS, CS.levels, inline=True, fmt=(lambda v: f'{v:.2f} V'), fontsize=9, manual=manual_locations)
 
     # plt.show()
-    plt.savefig(f'./contour/contour_{OPTIONS_DICT[setup]}.pdf', format='pdf', bbox_inches='tight')
+    plt.savefig(f'./2exp/contour/contour_{OPTIONS_DICT[setup]}.pdf', format='pdf', bbox_inches='tight')
