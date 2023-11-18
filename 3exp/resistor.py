@@ -1,9 +1,8 @@
 # code by Matheus Seiji L. N. for F 329 - Experimental Physics III in 2s/2023
-from utils import print_m, hex_to_rgba, least_sqr_fit
+from utils import least_sqr_fit
 
 import matplotlib.pyplot as plt
 import numpy as np
-import math
 
 datasets = []
 OPTIONS_DICT = ['current', 'resistance']
@@ -35,7 +34,7 @@ with open('./3exp/data/resistor.txt', 'r') as f:
     for setup in range(2):
         X = [] 
         Y = []
-        ux = [] # uncertainty
+        ux = [] # uncertainties
         uy = []
         for i in range(len(datasets[setup])):
             X.append(datasets[setup][i][0])
@@ -43,7 +42,6 @@ with open('./3exp/data/resistor.txt', 'r') as f:
             ux.append(datasets[setup][i][1])
             uy.append(datasets[setup][i][3])
 
-        # Y = [y/1000 for y in X]
         (a, b) = least_sqr_fit(X, Y)
         print(f'{a}x + {b}')
         f = lambda x: a*x + b
@@ -63,7 +61,7 @@ with open('./3exp/data/resistor.txt', 'r') as f:
         ax.spines['left'].set_visible(False)
 
         
-        
+        pdf_title = 'resistor' 
         if OPTIONS_DICT[setup] == 'current':
             ax.plot(fx, fy, color=COLORS[setup], alpha=0.5, label=f'I(x) = ({a:.4f} ± )x + ({b:.4f} ± )')
             ax.plot(X, Y, marker='.', color=COLORS[setup], linestyle='none')
@@ -71,6 +69,8 @@ with open('./3exp/data/resistor.txt', 'r') as f:
             ax.set_ylim((-9, 9))
             ax.set_ylabel('Corrente (mA)')     
             ax.set_title('Resistor: Voltagem x Corrente')
+
+            pdf_title += '_current'
         else: # OPTIONS_DICT[setup] == 'resistance'
             ax.plot(fx, fy, color=COLORS[setup], alpha=0.5, label=f'R(x) = ({a:.4f} ± )x + ({b:.4f} ± )')
             ax.plot(X, Y, marker='.', color=COLORS[setup], linestyle='none')
@@ -78,7 +78,8 @@ with open('./3exp/data/resistor.txt', 'r') as f:
             ax.set_ylim((0.1, 110))
             ax.set_ylabel('Resitência (Ω)')
             ax.set_title('Resistor: Voltagem x Resistência')
+            pdf_title += '_resistance'
         ax.legend()
-        
-        #plt.errorbar(X, Y, xerr=ux, yerr=uy, fmt=".-", color=COLORS[setup], label=OPTIONS_DICT[setup])
-        plt.show()
+        plt.errorbar(X, Y, xerr=ux, yerr=uy, fmt=".-", color=COLORS[setup], label=OPTIONS_DICT[setup])
+
+        plt.savefig(f'./3exp/resistor/{pdf_title}.pdf', format='pdf', bbox_inches='tight')
