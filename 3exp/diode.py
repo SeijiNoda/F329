@@ -57,7 +57,6 @@ with open('./3exp/data/diode.txt', 'r') as f:
         ax.spines['left'].set_visible(False)
         
         if OPTIONS_DICT[setup] == 'current':
-            # 
             if log:
                 if zero_i:
                     start = 0
